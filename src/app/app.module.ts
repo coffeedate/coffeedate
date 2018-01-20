@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { DateComponent } from './components/date/date.component';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
+import { SurveyComponent } from './components/survey/survey.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '',      component: DateComponent },
   { path: 'onboarding',      component: OnboardingComponent },
+  { path: 'survey', component: SurveyComponent},
   { path: '**', component: LoginComponent }
 ];
 
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     DateComponent,
-    OnboardingComponent
+    OnboardingComponent,
+    SurveyComponent
   ],
   imports: [
     RouterModule.forRoot(
