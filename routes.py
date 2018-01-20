@@ -1,8 +1,9 @@
 """REST API for saying hi."""
 # from app import app as application
 from flask import *
+# import send_static_file
 import os
-application = Flask(__name__)
+application = Flask(__name__, static_folder='dist')
 BASE_URL = os.path.abspath(os.path.dirname(__file__))
 CLIENT_APP_FOLDER = os.path.join(BASE_URL, "dist")
 
@@ -64,9 +65,9 @@ print([ [codex[i][ans[j][i]] for i in range(codex_length)] for j in range(train_
 # Do you have siblings?
 # Do you like to go to concerts?
 
-@application.route('/<path:path>')
+@application.route('/<path:path>/')
 def send_js(path):
-	return send_from_directory(CLIENT_APP_FOLDER, path)
+	return send_from_directory(CLIENT_APP_FOLDER,"index.html")
 
 @application.route('/')
 def index():

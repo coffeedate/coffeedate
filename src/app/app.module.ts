@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
+import { CommonModule } from '@angular/common'
 
 
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
+    CommonModule,
     BrowserModule
   ],
   providers: [],
