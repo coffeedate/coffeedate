@@ -35,6 +35,37 @@ ans = np.random.randint(2, size=(train_size,codex_length))
 profiles = [[codex[i][ans[j][i]] for i in range(codex_length)] for j in range(train_size)]
 labels = [] * train_size
 
+class User:
+	def __init__(self, name, description, picture, interests, likes=[], likedBy=[], matches=[]):
+		self.name = name
+		self.description = description
+		self.picture = picture
+		self.interests = interests
+		self.likes = likes
+		self.liked = liked
+		self.matches = matches
+	def like(userName):
+		liked.append(userName)
+		if userName in likedBy:
+			return match(userName)
+	def getLiked(userName):
+		likedBy.append(userName)
+		if userName in likes:
+			return match(userName)
+	def match(userName):
+		matches.append(userName)
+		return userName
+
+users = {}
+auth = {}
+
+def myconvert(o):
+	if callable(o):
+		return o.__str__()
+	if isinstance(o, datetime.datetime):
+		return o.__str__()
+	return o.__dict__
+
 @application.route('/api/makeLabel/', methods=["POST"])
 def makeLabel():
 	r = request.get_json()
@@ -49,6 +80,41 @@ def getProfile():
 	if "index" not in r:
 		return json.dumps("bamboozle")
 	return json.dumps(profiles[int(r["index"])])
+
+@application.route('/api/makeUser/', methods=["POST"])
+def makeUser():
+	r = request.get_json()
+	if "userName" not in r:
+		return json.dumps("bamboozle")
+	auth[r['userName']] = (r['password'], r['name'])
+	user = User(
+		r['name'],
+		r['description'],
+		r['picture'],
+		r['interests']
+		)
+	users[r['name']] = user
+	return json.dumps(user, default = myconvert)
+
+@application.route('/api/getUser/', methods=["GET"])
+def getUser():
+	r = request.args
+	if "userName" not in r:
+		return json.dumps("bamboozle")
+	authInfo = auth[r["userName"]]
+	truePass = authInfo[0]
+	if truePass == r["password"]:
+		return json.dumps(users[authInfo[1]], default = myconvert)
+
+@application.route('/api/like/', methods=["POST"])
+def like():
+	r = request.get_json()
+	if "userA" not in r:
+		return json.dumps("bamboozle")
+	userA = users[r["userA"]]
+	if userA.like(r["userB"]):
+		return json.dumps("You have a match!")
+	return json.dumps("No match")
 
 @application.route('/<path:path>/')
 def send_js(path):
