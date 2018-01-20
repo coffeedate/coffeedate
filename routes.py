@@ -32,15 +32,23 @@ codex = [['pets', 'no pets'],
 train_size = 400
 codex_length = len(codex)
 ans = np.random.randint(2, size=(train_size,codex_length))
-print([ [codex[i][ans[j][i]] for i in range(codex_length)] for j in range(train_size)])
+profiles = [[codex[i][ans[j][i]] for i in range(codex_length)] for j in range(train_size)]
+labels = [] * train_size
 
-@application.route('/api/getUser/', methods=["GET"])
-def getUser():
-	r = request.args
-	if "workerID" not in r:
+@application.route('/api/makeLabel/', methods=["POST"])
+def makeLabel():
+	r = request.get_json()
+	if "label" not in r:
 		return json.dumps("bamboozle")
-	worker = org.getNode(r["workerID"])
-	return json.dumps(worker, default=myconvert)
+	labels[r["index"]] = r["label"]
+	return json.dumps(labels[int(r["index"])])
+
+@application.route('/api/getProfile/', methods=["GET"])
+def getProfile():
+	r = request.args
+	if "index" not in r:
+		return json.dumps("bamboozle")
+	return json.dumps(profiles[int(r["index"])])
 
 @application.route('/<path:path>/')
 def send_js(path):
