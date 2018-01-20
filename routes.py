@@ -29,10 +29,34 @@ codex = [['pets', 'no pets'],
 		 ['close to your family','not close to your family'],		 
 		 ]
 
-train_size = 3
+train_size = 400
 codex_length = len(codex)
 ans = np.random.randint(2, size=(train_size,codex_length))
 print([ [codex[i][ans[j][i]] for i in range(codex_length)] for j in range(train_size)])
+
+@application.route('/api/getUser/', methods=["GET"])
+def getUser():
+	r = request.args
+	if "workerID" not in r:
+		return json.dumps("bamboozle")
+	worker = org.getNode(r["workerID"])
+	return json.dumps(worker, default=myconvert)
+
+@application.route('/<path:path>/')
+def send_js(path):
+	return send_from_directory(CLIENT_APP_FOLDER,"index.html")
+
+@application.route('/')
+def index():
+	return send_from_directory(CLIENT_APP_FOLDER,"index.html")
+
+if __name__ == "__main__":
+	# Setting debug to True enables debug output. This line should be
+	# removed before deploying a production app.
+	application.debug = True
+	application.run()
+
+
 
 
 # 1. Do you have or want any pets?
@@ -64,18 +88,3 @@ print([ [codex[i][ans[j][i]] for i in range(codex_length)] for j in range(train_
 # DIY or call an expert?
 # Do you have siblings?
 # Do you like to go to concerts?
-
-@application.route('/<path:path>/')
-def send_js(path):
-	return send_from_directory(CLIENT_APP_FOLDER,"index.html")
-
-@application.route('/')
-def index():
-	return send_from_directory(CLIENT_APP_FOLDER,"index.html")
-
-if __name__ == "__main__":
-	# Setting debug to True enables debug output. This line should be
-	# removed before deploying a production app.
-	application.debug = True
-	application.run()
-
