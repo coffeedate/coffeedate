@@ -53,7 +53,9 @@ export class SurveyComponent implements OnInit {
   ]
   arr = Array.from({length: 20}, (x,i) => i);
   userAnswers = Array.from({length: 20}, (x,i) => '');
+  name: any = localStorage.getItem('username') || 'YOUR_NAMES';
   constructor( private router: Router) { 
+    localStorage.setItem('username', 'Wellford');
   }
 
   ngOnInit() {

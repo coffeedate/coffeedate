@@ -1,7 +1,10 @@
 .card{
-    width: 600px;
-    height: 800px;
-    margin: 0 40%;
+    width: 200px;
+    /* height: 800px; */
+}
+.container {
+    width: 20vw;
+    margin: 30vh 40vw;
 }
 
 /* Full-width input fields */
@@ -47,10 +50,6 @@ img.avatar {
     width: 100px;
     height: 200px;
     border-radius: 50%;
-}
-
-.container {
-    padding: 16px;
 }
 
 span.psw {
