@@ -1,3 +1,9 @@
+.card{
+    width: 600px;
+    height: 800px;
+    margin: 0 40%;
+}
+
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
@@ -16,7 +22,7 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 49%;
 }
 
 button:hover {
@@ -38,7 +44,8 @@ button:hover {
 }
 
 img.avatar {
-    width: 40%;
+    width: 100px;
+    height: 200px;
     border-radius: 50%;
 }
 
@@ -53,7 +60,7 @@ span.psw {
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
+    /* display: none; Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
