@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 
 //The main url that is shared with the api serivce
-export const url = 'http://localhost:5000';
+export const url = 'http://coffeedate.us-west-1.elasticbeanstalk.com';
 
 @Injectable()
 export class ProfileService {
