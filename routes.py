@@ -46,7 +46,6 @@ class User:
 		self.likes = likes
 		self.likedBy = likedBy
 		self.matches = matches
-<<<<<<< HEAD
 	def like(self, userName):
 		self.likes.append(userName)
 		if userName in self.likedBy:
@@ -61,20 +60,6 @@ class User:
 		self.matches.append(userName)
 		# return userName
 		return True
-=======
-		self.survey = survey
-	def like(userName):
-		liked.append(userName)
-		if userName in likedBy:
-			return match(userName)
-	def getLiked(userName):
-		likedBy.append(userName)
-		if userName in likes:
-			return match(userName)
-	def match(userName):
-		matches.append(userName)
-		return userName
->>>>>>> da2230c570e392a35fa71131fbb9a298a9769bcd
 
 auth = {'wellford': ['wellford1', 'Wellford Chan'],
 		'james': ['james2', 'James Chen'],
@@ -163,6 +148,9 @@ def likeye():
 		return json.dumps("bamboozle")
 	userA = users[r["userA"]]
 	if userA.like(r["userB"]):
+		return json.dumps("You have a match!")
+	userB = users[r["userB"]]
+	if userB.getLiked(r["userA"]):
 		return json.dumps("You have a match!")
 	return json.dumps("No match")
 
