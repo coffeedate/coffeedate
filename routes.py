@@ -46,7 +46,10 @@ class User:
 		self.likes = likes
 		self.likedBy = likedBy
 		self.matches = matches
+<<<<<<< HEAD
+=======
 		self.newMatch = False
+>>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 	def getSurvey(self):
 		return self.survey
 	def like(self, userName):
@@ -63,10 +66,16 @@ class User:
 			return self.match(userName)
 		return False
 	def match(self, userName):
+<<<<<<< HEAD
+		self.matches.append(userName)
+		# return userName
+		return True
+=======
 		self.matches = userName
 		self.newMatch = True
 		return userName
 		# return True
+>>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 
 auth = {'wellford': ['wellford1', 'Wellford Chan'],
 		'james': ['james2', 'James Chen'],
@@ -336,15 +345,16 @@ def main_method():
         "min_samples_leaf": 10,
     }
     N = 100
-    path_train, path_test = 'labels.csv', 'test.csv'
-    df, dft = pd.read_csv(path_train), pd.read_csv(path_test)
+    path_train= 'labels.csv'
+    df = pd.read_csv(path_train)
     class_names = ["Right", "Left"]
     features = df.columns.values[1:]
-    y, yt = df['label'], dft['label']
-    df, dft = df.drop('label', axis=1), dft.drop('label', axis=1)
-    X, Z = df.values, dft.values
+    y = df['label'].as_matrix().astype(np.float)
+    df = df.drop('label', axis=1)
+    X= df.values
     dt = BoostedRandomForest()
-    dt.fit(X, np.round(y))
+    dt.fit(X, y)
+    return dt
     # TODO implement and evaluate parts c-h
 def smc(X, Y):
 	X = np.mat(X)
@@ -362,7 +372,11 @@ def predict():
 	if "userName" not in r:
 		return json.dumps("bamboozle")
 	thisUser = users[r['userName']]
+<<<<<<< HEAD
+	data = [smc(user.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()]
+=======
 	data = np.array([smc(thisUser.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()])
+>>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 	predictions = model.predict(data)
 	names = users.values()
 	people = dict(zip(names, predictions))
