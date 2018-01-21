@@ -1,5 +1,6 @@
 .container{
     height: 100vh;
+    float: right;
 }
 .carousel-inner{
     height: 100vh;
@@ -33,3 +34,10 @@
 .my-button:active {
     background-color: rgb(51, 80, 117); 
 }
+
+.sidenav{
+    height: 100vh;
+    background-color: white;
+    width:13vw;
+    float: left;
+  }
