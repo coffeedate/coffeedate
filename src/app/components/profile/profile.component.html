@@ -1,3 +1,25 @@
+<head>
+    <style>
+    h1 {
+        position:absolute;
+        color: black;
+        font-family: fantasy;
+        font-size: 350%;
+        text-align:center;
+        padding-left: 720px;
+        top: 200px;
+        
+      
+      
+    }
+    
+    </style>
+    </head>
+    
+    
+    <h1>Create Your Profile</h1>
+
+
 <div class="card">
   <form class="login-comp">
     <!-- <div class="imgcontainer">
@@ -5,17 +27,17 @@
     </div> -->
   
     <div class="container">
-      <label><b style="color: white;">Name</b></label> 
-      <input [(ngModel)]='Name' #ctrl="ngModel" type="text" placeholder="Enter name" name="name" required>
+      <label><b style="color: black;">Name</b></label> 
+      <input [(ngModel)]='Name' #ctrl="ngModel" type="text" placeholder="Enter Name" name="name" required>
   
-      <label><b style="color: white;">Description</b></label>
+      <label><b style="color:black;">Description</b></label>
       <input [(ngModel)]='Description' #ctrl="ngModel" type="text" placeholder="Enter Description" name="desc" required>
   
-      <label><b style="color: white;">Interest</b></label>
+      <label><b style="color:black;">Interest</b></label>
       <input [(ngModel)]='Interest' #ctrl="ngModel" type="text" placeholder="Enter Interest" name="interest" required>
       
-      <label><b style="color: white;">Avatar</b></label>
-      <input [(ngModel)]='Avatar' #ctrl="ngModel" type="text" placeholder="Link to picture" name="pic" required>
+      <label><b style="color:black;">Avatar</b></label>
+      <input [(ngModel)]='Avatar' #ctrl="ngModel" type="text" placeholder="Link to Picture" name="pic" required>
       
       <button type="submit" (click)='submit()'>Submit</button>
       
