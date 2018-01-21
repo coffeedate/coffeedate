@@ -12,9 +12,9 @@ export class SignUpComponent implements OnInit {
   username = '';
   password = '';
   ConfirmPassword = '';
-  emailaddress = '';
-  birthdate = '';
-  zipcode = '';
+  // emailaddress = '';
+  // birthdate = '';
+  // zipcode = '';
 
   constructor(private router: Router) { 
   }
@@ -26,11 +26,13 @@ export class SignUpComponent implements OnInit {
     localStorage.setItem('username', this.username);
     localStorage.setItem('password', this.password);
     localStorage.setItem('ConfirmPassword', this.ConfirmPassword );
-    localStorage.setItem('emailaddress', this.emailaddress);
-    localStorage.setItem('birthdate', this.birthdate);
-    localStorage.setItem('zipcode', this.zipcode);
+    // localStorage.setItem('emailaddress', this.emailaddress);
+    // localStorage.setItem('birthdate', this.birthdate);
+    // localStorage.setItem('zipcode', this.zipcode);
     
-    if( this.username != '' && this.password != '' && this.ConfirmPassword != '' && this.emailaddress != '' && this.birthdate != '' && this.zipcode != ''){
+    if( this.username != '' && this.password != '' && this.ConfirmPassword != '' 
+    //&& this.emailaddress != '' && this.birthdate != '' && this.zipcode != ''
+  ){
       this.router.navigate(['profile']);
     }
   }

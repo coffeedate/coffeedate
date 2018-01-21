@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service'
 
 @Component({
   selector: 'app-survey',
@@ -52,7 +53,7 @@ export class SurveyComponent implements OnInit {
   arr = Array.from({length: 19}, (x,i) => i);
   userAnswers = Array.from({length: 19}, (x,i) => '');
   name: any = localStorage.getItem('username') || 'YOUR_NAMES';
-  constructor( private router: Router) { 
+  constructor( private router: Router, private ApiService: ApiService) { 
 
   }
 
@@ -63,11 +64,23 @@ export class SurveyComponent implements OnInit {
     this.userAnswers.splice(i, 1);
     this.userAnswers.splice(i, 0, ans);
     console.log(this.userAnswers)
-    localStorage.setItem('userAnswers', this.userAnswers.toString())
+    localStorage.setItem('survey', this.userAnswers.toString())
   }
 
   finish(){
-    this.router.navigate(['profile']);
+    console.log("ye");
+    console.log(this.userAnswers);
+    console.log(this.userAnswers.slice(0,18).toString());
+    this.ApiService.makeUser(localStorage.getItem('username'), localStorage.getItem('password'), localStorage.getItem('name'), localStorage.getItem('description'), localStorage.getItem('picture'), localStorage.getItem('interests'), this.userAnswers.slice(0,18).toString()).subscribe(
+      (data) => {
+        console.log(data)
+        this.router.navigate(['finding']);
+      },
+      (err) => {
+        console.log(err)
+        // this.router.navigate(['finding']);
+      }
+    )
   }
 
 }

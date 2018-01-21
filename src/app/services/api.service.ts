@@ -8,6 +8,7 @@ export class ApiService {
   constructor( private http: Http ) { }
 
   makeUser(userName, password, name, description, picture, interests, survey){
+    console.log(survey);
     let data = {
       'userName': userName,
       'password': password,
@@ -17,6 +18,7 @@ export class ApiService {
       'interests': interests,
       'survey': survey
     };
+    // console.log(data['survey']);
 
     return this.http.post( url + '/api/makeUser/', data);
   }
@@ -25,8 +27,8 @@ export class ApiService {
     return this.http.get( url + '/api/getUser?userName=' + userName + '&password=' + password);
   }
 
-  getAllUsers(){
-    return this.http.get( url + '/api/getAllUsers/');
+  getAllUsers(userName){
+    return this.http.get( url + '/api/predict/?userName=' + userName);
   }
 
   like(userA, userB){

@@ -9,6 +9,7 @@ import { ApiService } from '../../services/api.service'
 })
 export class FindingComponent implements OnInit {
 
+  name = '';
   username = '';
   password = '';
   matches = [];
@@ -29,14 +30,16 @@ export class FindingComponent implements OnInit {
   }
 
   getUsers(){
-    this.ApiService.getAllUsers().subscribe(
+    this.name = localStorage.getItem('name');
+    this.ApiService.getAllUsers(this.name).subscribe(
       (data) => {
         // console.log(data);
         let body = JSON.parse(data['_body']);
-        // console.log(body)
+
         for(let item in body){
           // console.log(item)
-          if(localStorage.getItem('name') != item)
+
+          if(this.name != body[item].name)
             this.userList.push(body[item]);
         }
 
@@ -104,6 +107,10 @@ export class FindingComponent implements OnInit {
         }
       )
     }
+  }
+
+  routeLogin(){
+    this.router.navigate(['login']);
   }
 
 }
