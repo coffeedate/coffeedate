@@ -66,7 +66,6 @@ class User:
 		self.matches.add(userName)
 		self.newMatch = True
 		return userName
-		# return True
 
 auth = {'wellford': ['wellford1', 'Wellford Chan'],
 		'james': ['james2', 'James Chen'],
