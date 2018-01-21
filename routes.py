@@ -4,10 +4,20 @@ from flask import *
 # import send_static_file
 import os
 import datetime
-application = Flask(__name__, static_folder='dist')
+application = Flask(__name__)
 BASE_URL = os.path.abspath(os.path.dirname(__file__))
 CLIENT_APP_FOLDER = os.path.join(BASE_URL, "dist")
+jinja_options = application.jinja_options.copy()
 
+jinja_options.update(dict(
+    block_start_string='<%',
+    block_end_string='%>',
+    variable_start_string='%%',
+    variable_end_string='%%',
+    comment_start_string='<#',
+    comment_end_string='#>'
+))
+application.jinja_options = jinja_options
 import numpy as np
 import datetime
 np.random.seed(42)
@@ -164,9 +174,9 @@ def likeye():
 	else:
 		return json.dumps("No match")
 
-@application.route('/<path:path>/')
+@application.route('/<path:path>')
 def send_js(path):
-	return send_from_directory(CLIENT_APP_FOLDER,"index.html")
+	return send_from_directory(CLIENT_APP_FOLDER, path)
 
 @application.route('/')
 def index():
