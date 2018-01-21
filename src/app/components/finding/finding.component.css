@@ -1,5 +1,7 @@
 .container{
     height: 100vh;
+    width:86vw;
+    float: right;
 }
 .carousel-inner{
     height: 100vh;
@@ -28,8 +30,18 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 16px;
+    width: 170px;
 }
 .my-button:active {
     background-color: rgb(51, 80, 117); 
 }
+
+.sidenav{
+    height: 100vh;
+    background-color:#cccccc;
+    max-width:13vw;
+    float: left;
+  }

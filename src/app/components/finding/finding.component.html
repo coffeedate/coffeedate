@@ -1,3 +1,11 @@
+<div class="sidenav">
+    <h1 style="text-align: center;">Matches</h1>
+    <div *ngFor="let match of matches; let i = index">
+        <button class="my-button" role="button" (click)='routeToCam(match)'>{{match}}</button>
+        <mat-divider></mat-divider>
+    </div>
+      <p *ngIf="!isMatches">No matches :/</p>
+</div>
 <div class="container">
   <br>
   <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval='false'>
@@ -46,3 +54,6 @@
     </a> -->
   </div>
 </div>
+
+  
+ 

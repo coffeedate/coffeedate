@@ -156,12 +156,12 @@ def likeye():
 	if "userA" not in r:
 		return json.dumps("bamboozle")
 	userA = users[r["userA"]]
+	userB = users[r["userB"]]
+	userB.getLiked(r["userA"])
 	if userA.like(r["userB"]):
 		return json.dumps("You have a match!")
-	userB = users[r["userB"]]
-	if userB.getLiked(r["userA"]):
-		return json.dumps("You have a match!")
-	return json.dumps("No match")
+	else:
+		return json.dumps("No match")
 
 @application.route('/<path:path>/')
 def send_js(path):
@@ -365,11 +365,7 @@ def predict():
 	if "userName" not in r:
 		return json.dumps("bamboozle")
 	thisUser = users[r['userName']]
-<<<<<<< HEAD
-	data = [smc(user.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()]
-=======
 	data = np.array([smc(thisUser.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()])
->>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 	predictions = model.predict(data)
 	names = users.values()
 	people = dict(zip(names, predictions))
