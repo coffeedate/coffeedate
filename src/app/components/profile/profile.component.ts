@@ -24,17 +24,8 @@ export class ProfileComponent implements OnInit {
       localStorage.setItem('description', this.Description);
       localStorage.setItem('picture', this.Avatar);
       localStorage.setItem('interests', this.Interest);
-      this.ApiService.makeUser(localStorage.getItem('username'), localStorage.getItem('password'), this.Name, this.Description, this.Avatar, this.Interest, localStorage.getItem('survey')).subscribe(
-        (data) => {
-          console.log(data)
-          this.router.navigate(['finding']);
-        },
-        (err) => {
-          console.log(err)
-          this.router.navigate(['finding']);
-        }
-      )
+      this.router.navigate(['survey'])
+     
     }
-  
-
-
+  }
+}

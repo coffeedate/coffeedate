@@ -47,14 +47,12 @@ export class LoginComponent implements OnInit {
   }
 
   signUp(){
-    localStorage.setItem('username', this.username);
-    localStorage.setItem('password', this.password);
-    if(this.username != '' && this.password != '') {
-      this.router.navigate(['survey']);
-    }
+    // localStorage.setItem('username', this.username);
+    // localStorage.setItem('password', this.password);
+    // if(this.username != '' && this.password != '') {
+    //   this.router.navigate(['survey']);
+    // }
+    this.router.navigate(['signup'])
   }
 
-  signup(){
-    this.router.navigate(['signup']);
-  }
 }

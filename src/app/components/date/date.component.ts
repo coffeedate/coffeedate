@@ -17,4 +17,8 @@ export class DateComponent implements OnInit {
     this.router.navigate(['finding']);
   }
 
+  routeLogin(){
+    this.router.navigate(['login']);
+  }
+
 }
