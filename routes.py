@@ -119,6 +119,8 @@ def getProfile():
 def getLabels():
 	return json.dumps(labels)
 
+import ast
+
 @application.route('/api/makeUser/', methods=["POST"])
 def makeUser():
 	r = request.get_json()
@@ -131,7 +133,7 @@ def makeUser():
 		r['description'],
 		r['picture'],
 		r['interests'],
-		survey=r['survey']
+		survey=ast.literal_eval(['survey'])
 		)
 	users[r['name']] = user
 	return json.dumps(user, default = myconvert)
