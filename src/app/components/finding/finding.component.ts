@@ -8,8 +8,7 @@ import { ApiService } from '../../services/api.service'
   styleUrls: ['./finding.component.css']
 })
 export class FindingComponent implements OnInit {
-
-  name = '';
+  
   username = '';
   password = '';
   matches = [];
