@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="item" *ngFor='let i of arr'>
-        <img src="{{userList[i].picture}}" alt="" width="480" height="365">
+        <img src="{{userList[i].picture || ''}}" alt="" width="480" height="365">
         <div class="carousel-caption" *ngIf='i < arr.length - 1'>
           <h1>{{userList[i].name}}</h1>
           <h3>{{userList[i].description}}</h3>
