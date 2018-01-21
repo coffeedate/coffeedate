@@ -43,3 +43,4 @@ with open("labels.csv", "w") as f:
 with open("test.csv", "w") as g:
     writer = csv.writer(g)
     writer.writerows(labeled_data[300:])
+    
