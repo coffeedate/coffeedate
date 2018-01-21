@@ -13,21 +13,21 @@
       <div class="item active">
         <img src="https://i.imgur.com/A0ZYKAb.png" alt="Chania" width="480" height="365">
         <div class="carousel-caption">
-          <h1>Hello {{name}}!</h1>
+          <h1 (click)="getUsers()">Hello {{name}}!</h1>
           <h3>Let's get you started. If you are interested in the person you are seeing, press the interested button.</h3>
           <button class="my-button" href="#myCarousel" role="button" data-slide="next">Okay!</button>
         </div>
       </div>
       <div class="item" *ngFor='let i of arr'>
-        <img src="{{userList[i].picture}}" alt="Chania" width="480" height="365">
-        <div class="carousel-caption" *ngIf='i < arr.length-1'>
+        <img src="{{userList[i].picture}}" alt="" width="480" height="365">
+        <div class="carousel-caption" *ngIf='i < arr.length - 1'>
           <h1>{{userList[i].name}}</h1>
           <h3>{{userList[i].description}}</h3>
           <h3>{{userList[i].interests}}</h3>
-          <button class="my-button" href="#myCarousel" role="button" data-slide="next" (click)="logAnswer(i, 0)">Pass</button>
-          <button class="my-button" href="#myCarousel" role="button" data-slide="next" (click)="logAnswer(i, 1)">Interested</button>
-        </div>
-        <div class="carousel-caption" *ngIf='i == arr.length-1'>
+          <button class="my-button" href="#myCarousel" role="button" data-slide="next">Pass</button>
+          <button class="my-button" href="#myCarousel" role="button" data-slide="next" (click)='like(i)'>Interested</button>
+        </div> 
+        <div class="carousel-caption" *ngIf='i == arr.length - 1'> 
           <h1>Sorry we are out of users!</h1>
           <h3>Please wait to see if any of your interests have responded</h3>
           <!-- <button class="my-button" (click)="finish()">Get Started!</button> -->

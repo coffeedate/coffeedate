@@ -15,9 +15,13 @@ import { DateComponent } from './components/date/date.component';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { SurveyComponent } from './components/survey/survey.component';
 import { TrainingComponent } from './components/training/training.component';
+import { FindingComponent } from './components/finding/finding.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'finding', component: FindingComponent },
   { path: 'training', component: TrainingComponent},
   { path: '',      component: DateComponent, canActivate: [AuthGuard] },
   { path: 'onboarding',      component: OnboardingComponent, canActivate: [AuthGuard] },
@@ -28,11 +32,13 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    ProfileComponent,
     LoginComponent,
     DateComponent,
     OnboardingComponent,
     SurveyComponent,
-    TrainingComponent
+    TrainingComponent,
+    FindingComponent
   ],
   imports: [
     RouterModule.forRoot(

@@ -3,6 +3,7 @@
 from flask import *
 # import send_static_file
 import os
+import datetime
 application = Flask(__name__, static_folder='dist')
 BASE_URL = os.path.abspath(os.path.dirname(__file__))
 CLIENT_APP_FOLDER = os.path.join(BASE_URL, "dist")
@@ -42,19 +43,22 @@ class User:
 		self.picture = picture
 		self.interests = interests
 		self.likes = likes
-		self.liked = likedBy
+		self.likedBy = likedBy
 		self.matches = matches
-	def like(userName):
-		liked.append(userName)
-		if userName in likedBy:
-			return match(userName)
-	def getLiked(userName):
-		likedBy.append(userName)
-		if userName in likes:
-			return match(userName)
-	def match(userName):
-		matches.append(userName)
-		return userName
+	def like(self, userName):
+		self.likes.append(userName)
+		if userName in self.likedBy:
+			return self.match(userName)
+		return False
+	def getLiked(self, userName):
+		self.likedBy.append(userName)
+		if userName in self.likes:
+			return self.match(userName)
+		return False
+	def match(self, userName):
+		self.matches.append(userName)
+		# return userName
+		return True
 
 auth = {'wellford': ['wellford1', 'Wellford Chan'],
 		'james': ['james2', 'James Chen'],
@@ -135,7 +139,7 @@ def getAllUsers():
 	return json.dumps(users, default = myconvert)
 
 @application.route('/api/like/', methods=["POST"])
-def like():
+def likeye():
 	r = request.get_json()
 	if "userA" not in r:
 		return json.dumps("bamboozle")

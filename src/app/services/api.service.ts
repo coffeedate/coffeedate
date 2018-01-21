@@ -7,21 +7,22 @@ export class ApiService {
 
   constructor( private http: Http ) { }
 
-  makeUser(userName, password, name, description, picture, interests){
+  makeUser(userName, password, name, description, picture, interests, survey){
     let data = {
       'userName': userName,
       'password': password,
       'name': name,
       'description': description,
       'picture': picture,
-      'interests': interests 
+      'interests': interests,
+      'survey': survey
     };
 
     return this.http.post( url + '/api/makeUser/', data);
   }
 
   getUser(userName, password){
-    return this.http.get( url + '/api/getUser/?userName=' + userName + '/?password=' + password);
+    return this.http.get( url + '/api/getUser?userName=' + userName + '&password=' + password);
   }
 
   getAllUsers(){

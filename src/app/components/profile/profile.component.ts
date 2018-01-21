@@ -20,7 +20,11 @@ export class ProfileComponent implements OnInit {
 
   submit(){
     if( this.Name != '' && this.Description != '' && this.Interest != '' && this.Avatar != ''){
-      this.ApiService.makeUser(localStorage.getItem('username'), localStorage.getItem('password'), this.Name, this.Description, this.Avatar, this.Interest).subscribe(
+      localStorage.setItem('name', this.Name);
+      localStorage.setItem('description', this.Description);
+      localStorage.setItem('picture', this.Avatar);
+      localStorage.setItem('interests', this.Interest);
+      this.ApiService.makeUser(localStorage.getItem('username'), localStorage.getItem('password'), this.Name, this.Description, this.Avatar, this.Interest, localStorage.getItem('survey')).subscribe(
         (data) => {
           console.log(data)
           this.router.navigate(['finding']);
