@@ -1,19 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Router, CanActivate } from '@angular/router';
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms';
 
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+import { ProfileService as Profile} from './services/profile.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { DateComponent } from './components/date/date.component';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { SurveyComponent } from './components/survey/survey.component';
+import { TrainingComponent } from './components/training/training.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'training', component: TrainingComponent},
   { path: '',      component: DateComponent, canActivate: [AuthGuard] },
   { path: 'onboarding',      component: OnboardingComponent, canActivate: [AuthGuard] },
   { path: 'survey', component: SurveyComponent, canActivate: [AuthGuard]},
@@ -26,7 +30,8 @@ const appRoutes: Routes = [
     LoginComponent,
     DateComponent,
     OnboardingComponent,
-    SurveyComponent
+    SurveyComponent,
+    TrainingComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -35,10 +40,12 @@ const appRoutes: Routes = [
     ),
     CommonModule,
     FormsModule,
-    BrowserModule
+    BrowserModule,
+    HttpModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    Profile
   ],
   bootstrap: [AppComponent]
 })

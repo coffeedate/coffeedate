@@ -33,7 +33,7 @@ train_size = 400
 codex_length = len(codex)
 ans = np.random.randint(2, size=(train_size,codex_length))
 profiles = [[codex[i][ans[j][i]] for i in range(codex_length)] for j in range(train_size)]
-labels = [] * train_size
+labels = [None] * train_size
 
 @application.route('/api/makeLabel/', methods=["POST"])
 def makeLabel():
@@ -49,6 +49,10 @@ def getProfile():
 	if "index" not in r:
 		return json.dumps("bamboozle")
 	return json.dumps(profiles[int(r["index"])])
+
+@application.route('/api/getLabels/', methods=["GET"])
+def getLabels():
+	return json.dumps(labels)
 
 @application.route('/<path:path>/')
 def send_js(path):
