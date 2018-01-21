@@ -38,22 +38,20 @@ profiles = [[codex[i][ans[j][i]] for i in range(codex_length)] for j in range(tr
 labels = [None] * train_size
 
 class User:
-	def __init__(self, name, description, picture, interests, likes=[], likedBy=[], matches=[], survey=[]):
+	def __init__(self, name, description, picture, interests, survey):
 		self.name = name
 		self.description = description
 		self.picture = picture
 		self.interests = interests
-		self.likes = likes
-		self.likedBy = likedBy
-		self.matches = matches
-<<<<<<< HEAD
-=======
 		self.newMatch = False
->>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
+		self.survey = survey
+		self.iLike = []
+		self.likedBy = []
+		self.matches = []
 	def getSurvey(self):
 		return self.survey
 	def like(self, userName):
-		self.likes.append(userName)
+		self.iLike.append(userName)
 		if userName in self.likedBy:
 			return self.match(userName)
 		if self.newMatch:
@@ -62,20 +60,13 @@ class User:
 		return False
 	def getLiked(self, userName):
 		self.likedBy.append(userName)
-		if userName in self.likes:
-			return self.match(userName)
-		return False
+		if userName in self.iLike:
+			self.match(userName)
 	def match(self, userName):
-<<<<<<< HEAD
 		self.matches.append(userName)
-		# return userName
-		return True
-=======
-		self.matches = userName
 		self.newMatch = True
 		return userName
 		# return True
->>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 
 auth = {'wellford': ['wellford1', 'Wellford Chan'],
 		'james': ['james2', 'James Chen'],
@@ -163,12 +154,12 @@ def likeye():
 	if "userA" not in r:
 		return json.dumps("bamboozle")
 	userA = users[r["userA"]]
+	userB = users[r["userB"]]
+	userB.getLiked(r["userA"])
 	if userA.like(r["userB"]):
 		return json.dumps("You have a match!")
-	userB = users[r["userB"]]
-	if userB.getLiked(r["userA"]):
-		return json.dumps("You have a match!")
-	return json.dumps("No match")
+	else:
+		return json.dumps("No match")
 
 @application.route('/<path:path>/')
 def send_js(path):
@@ -372,11 +363,7 @@ def predict():
 	if "userName" not in r:
 		return json.dumps("bamboozle")
 	thisUser = users[r['userName']]
-<<<<<<< HEAD
-	data = [smc(user.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()]
-=======
 	data = np.array([smc(thisUser.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()])
->>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 	predictions = model.predict(data)
 	names = users.values()
 	people = dict(zip(names, predictions))
