@@ -30,4 +30,8 @@ labeled_data = [[labels[i], ans[i]] for i in range(train_size)]
 
 with open("labels.csv", "w") as f:
     writer = csv.writer(f)
-    writer.writerows(labeled_data)
+    writer.writerows(labeled_data[:299])
+
+with open("test.csv", "w") as g:
+    writer = csv.writer(g)
+    writer.writerows(labeled_data[300:])
