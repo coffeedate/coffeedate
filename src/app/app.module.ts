@@ -25,7 +25,7 @@ const appRoutes: Routes = [
   { path: 'finding', component: FindingComponent },
   { path: 'training', component: TrainingComponent},
   { path: 'signup', component:SignUpComponent},
-  { path: '',      component: DateComponent, canActivate: [AuthGuard] },
+  { path: 'date',      component: DateComponent, canActivate: [AuthGuard] },
   { path: 'onboarding',      component: OnboardingComponent, canActivate: [AuthGuard] },
   { path: 'survey', component: SurveyComponent, canActivate: [AuthGuard]},
   { path: '**', component: LoginComponent }
