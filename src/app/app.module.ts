@@ -15,6 +15,7 @@ import { DateComponent } from './components/date/date.component';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { SurveyComponent } from './components/survey/survey.component';
 import { TrainingComponent } from './components/training/training.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FindingComponent } from './components/finding/finding.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'finding', component: FindingComponent },
   { path: 'training', component: TrainingComponent},
+  { path: 'signup', component:SignUpComponent},
   { path: '',      component: DateComponent, canActivate: [AuthGuard] },
   { path: 'onboarding',      component: OnboardingComponent, canActivate: [AuthGuard] },
   { path: 'survey', component: SurveyComponent, canActivate: [AuthGuard]},
@@ -38,6 +40,7 @@ const appRoutes: Routes = [
     OnboardingComponent,
     SurveyComponent,
     TrainingComponent,
+    SignUpComponent,
     FindingComponent
   ],
   imports: [

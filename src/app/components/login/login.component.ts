@@ -53,4 +53,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['survey']);
     }
   }
+
+  signup(){
+    this.router.navigate(['signup']);
+  }
 }
