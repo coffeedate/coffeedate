@@ -46,12 +46,19 @@ class User:
 		self.likes = likes
 		self.likedBy = likedBy
 		self.matches = matches
+<<<<<<< HEAD
+=======
+		self.newMatch = False
+>>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 	def getSurvey(self):
 		return self.survey
 	def like(self, userName):
 		self.likes.append(userName)
 		if userName in self.likedBy:
 			return self.match(userName)
+		if self.newMatch:
+			self.newMatch = False
+			return True
 		return False
 	def getLiked(self, userName):
 		self.likedBy.append(userName)
@@ -59,9 +66,16 @@ class User:
 			return self.match(userName)
 		return False
 	def match(self, userName):
+<<<<<<< HEAD
 		self.matches.append(userName)
 		# return userName
 		return True
+=======
+		self.matches = userName
+		self.newMatch = True
+		return userName
+		# return True
+>>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 
 auth = {'wellford': ['wellford1', 'Wellford Chan'],
 		'james': ['james2', 'James Chen'],
@@ -357,7 +371,11 @@ def predict():
 	if "userName" not in r:
 		return json.dumps("bamboozle")
 	thisUser = users[r['userName']]
+<<<<<<< HEAD
 	data = [smc(user.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()]
+=======
+	data = np.array([smc(thisUser.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()])
+>>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 	predictions = model.predict(data)
 	names = users.values()
 	people = dict(zip(names, predictions))
