@@ -46,12 +46,16 @@ class User:
 		self.likes = likes
 		self.likedBy = likedBy
 		self.matches = matches
+		self.newMatch = False
 	def getSurvey(self):
 		return self.survey
 	def like(self, userName):
 		self.likes.append(userName)
 		if userName in self.likedBy:
 			return self.match(userName)
+		if self.newMatch:
+			self.newMatch = False
+			return True
 		return False
 	def getLiked(self, userName):
 		self.likedBy.append(userName)
@@ -59,9 +63,10 @@ class User:
 			return self.match(userName)
 		return False
 	def match(self, userName):
-		self.matches.append(userName)
-		# return userName
-		return True
+		self.matches = userName
+		self.newMatch = True
+		return userName
+		# return True
 
 auth = {'wellford': ['wellford1', 'Wellford Chan'],
 		'james': ['james2', 'James Chen'],
