@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { ProfileService as Profile} from './services/profile.service';
+import { ApiService } from './services/api.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthGuard,
+    ApiService,
     Profile
   ],
   bootstrap: [AppComponent]

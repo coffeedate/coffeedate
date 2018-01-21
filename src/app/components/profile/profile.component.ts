@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgModel } from '@angular/forms';
+import { ApiService } from '../../services/api.service'
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -11,14 +13,23 @@ export class ProfileComponent implements OnInit {
   Description = ''
   Interest = ''
   Avatar = ''
-  constructor(private router: Router) { }
+  constructor(private router: Router, private ApiService: ApiService) { }
 
   ngOnInit() {
   }
 
-  login(){
+  submit(){
     if( this.Name != '' && this.Description != '' && this.Interest != '' && this.Avatar != ''){
-      this.router.navigate(['finding']);
+      this.ApiService.makeUser(localStorage.getItem('username'), localStorage.getItem('password'), this.Name, this.Description, this.Avatar, this.Interest).subscribe(
+        (data) => {
+          console.log(data)
+          this.router.navigate(['finding']);
+        },
+        (err) => {
+          console.log(err)
+          this.router.navigate(['finding']);
+        }
+      )
     }
   }
 

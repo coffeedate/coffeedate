@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service'
 
 @Component({
   selector: 'app-finding',
@@ -31,17 +32,20 @@ export class FindingComponent implements OnInit {
       description: 'no longer endangered',
       picture: 'https://scontent.fsnc1-1.fna.fbcdn.net/v/t1.0-9/26814904_878256455667619_4477007155290854499_n.jpg?oh=005ebf3cd5721f7d675865bfa307729a&oe=5AE4C9C2',
       interests: 'long walks on the beach' 
-    },
-    {
-      name: 'Ashwinee Panda',
-      description: 'no longer endangered',
-      picture: 'https://i.imgur.com/A0ZYKAb.png',
-      interests: 'long walks on the beach' 
-    },
+    }
   ]
   arr = Array.from({length: this.userList.length}, (x,i) => i);
   name: any = localStorage.getItem('username') || 'YOUR_NAMES';
-  constructor() { }
+  constructor( private ApiService: ApiService ) { 
+    this.ApiService.getAllUsers().subscribe(
+      (data) => {
+        console.log(data);
+      }, 
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
 
   ngOnInit() {
   }

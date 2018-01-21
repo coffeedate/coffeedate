@@ -11,6 +11,9 @@
     <label><b style="color: white;">Password</b></label>
     <input [(ngModel)]='password' #ctrl="ngModel" type="password" placeholder="Enter Password" name="psw" required>
 
+    <p style='color:red'>
+      {{error}}
+    </p>
     <button type="submit" (click)='login()'>Login</button>
     <button type="submit" style="background-color: darkgrey !important" (click)='login()'>Sign Up</button>
     <!-- <label> 
