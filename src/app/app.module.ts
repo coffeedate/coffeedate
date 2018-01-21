@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { ProfileService as Profile} from './services/profile.service';
+import { ApiService } from './services/api.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,9 +16,13 @@ import { OnboardingComponent } from './components/onboarding/onboarding.componen
 import { SurveyComponent } from './components/survey/survey.component';
 import { TrainingComponent } from './components/training/training.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { FindingComponent } from './components/finding/finding.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'finding', component: FindingComponent },
   { path: 'training', component: TrainingComponent},
   { path: 'signup', component:SignUpComponent},
   { path: '',      component: DateComponent, canActivate: [AuthGuard] },
@@ -29,12 +34,14 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    ProfileComponent,
     LoginComponent,
     DateComponent,
     OnboardingComponent,
     SurveyComponent,
     TrainingComponent,
-    SignUpComponent
+    SignUpComponent,
+    FindingComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -48,6 +55,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthGuard,
+    ApiService,
     Profile
   ],
   bootstrap: [AppComponent]

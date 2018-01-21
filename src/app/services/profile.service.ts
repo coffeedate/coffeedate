@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 
+//The main url that is shared with the api serivce
+export const url = 'http://localhost:5000';
+
 @Injectable()
 export class ProfileService {
-
-  url = 'http://localhost:5000';
 
   constructor( private http: Http ) { }
 
   getProfile(profileID: number) {
-    return this.http.get( this.url + '/api/getProfile/?index=' + profileID);
+    return this.http.get( url + '/api/getProfile/?index=' + profileID);
   }
 
   getLabels() {
-    return this.http.get( this.url + '/api/getLabels/');
+    return this.http.get( url + '/api/getLabels/');
   }
 
   postLabel(index: number, label: number) {
@@ -24,7 +25,7 @@ export class ProfileService {
     console.log("yee")
     console.log(data);
 
-    return this.http.post(this.url + '/api/makeLabel/', data);
+    return this.http.post(url + '/api/makeLabel/', data);
   }
 
 }

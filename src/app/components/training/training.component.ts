@@ -16,10 +16,10 @@ export class TrainingComponent implements OnInit {
   labels;
 
   constructor(private http: Http, private ProfileServiceService: ProfileService) {
-    this.getProfile(this.currentProfileID);
    }
 
   ngOnInit() {
+    this.getProfile(this.currentProfileID);
   }
 
   getProfile(profileID: number) {

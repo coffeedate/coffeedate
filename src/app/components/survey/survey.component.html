@@ -21,13 +21,13 @@
 
       <div class="item" *ngFor='let i of arr'>
         <img src="https://i.imgur.com/A0ZYKAb.png" alt="Chania" width="480" height="365">
-        <div class="carousel-caption" *ngIf='i < 19'>
+        <div class="carousel-caption" *ngIf='i < 18'>
           <h1>Question {{i+1}}</h1>
           <h3>{{questionList[i]}}</h3>
           <button class="my-button" href="#myCarousel" role="button" data-slide="next" (click)="logAnswer(i, 0)">{{questionAnswers[i][0]}}</button>
           <button class="my-button" href="#myCarousel" role="button" data-slide="next" (click)="logAnswer(i, 1)">{{questionAnswers[i][1]}}</button>
         </div>
-        <div class="carousel-caption" *ngIf='i == 19'>
+        <div class="carousel-caption" *ngIf='i == 18'>
           <h1>Thanks for completing our onboarding!</h1>
           <h3>Click the button below to get started!</h3>
           <button class="my-button" (click)="finish()">Get Started!</button>

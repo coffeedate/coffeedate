@@ -27,7 +27,6 @@ export class SurveyComponent implements OnInit {
     'Do you tend to procrastinate?',
     'Do you like to travel?',
     'Are you an introvert or extrovert?',
-    'Are you close with your family?',
     'Are you close with your family?'
   ]
   questionAnswers = [
@@ -48,11 +47,10 @@ export class SurveyComponent implements OnInit {
     ['procrastinates','does not procrastinate'],
     ['likes to travel','does not like to travel'],
     ['introvert','extrovert'],
-    ['close to your family','not close to your family'],
-    ['close to your family','not close to your family'],			 
+    ['close to your family','not close to your family']		 
   ]
-  arr = Array.from({length: 20}, (x,i) => i);
-  userAnswers = Array.from({length: 20}, (x,i) => '');
+  arr = Array.from({length: 19}, (x,i) => i);
+  userAnswers = Array.from({length: 19}, (x,i) => '');
   name: any = localStorage.getItem('username') || 'YOUR_NAMES';
   constructor( private router: Router) { 
 
@@ -63,8 +61,9 @@ export class SurveyComponent implements OnInit {
 
   logAnswer(i, ans){
     this.userAnswers.splice(i, 1);
-    this.userAnswers.splice(i, 0, this.questionAnswers[i][ans]);
+    this.userAnswers.splice(i, 0, ans);
     console.log(this.userAnswers)
+    localStorage.setItem('userAnswers', this.userAnswers.toString())
   }
 
   finish(){
