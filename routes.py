@@ -38,22 +38,20 @@ profiles = [[codex[i][ans[j][i]] for i in range(codex_length)] for j in range(tr
 labels = [None] * train_size
 
 class User:
-	def __init__(self, name, description, picture, interests, likes=[], likedBy=[], matches=[], survey=[]):
+	def __init__(self, name, description, picture, interests, survey):
 		self.name = name
 		self.description = description
 		self.picture = picture
 		self.interests = interests
-		self.likes = likes
-		self.likedBy = likedBy
-		self.matches = matches
-<<<<<<< HEAD
-=======
 		self.newMatch = False
->>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
+		self.survey = survey
+		self.iLike = set()
+		self.likedBy = set()
+		self.matches = set()
 	def getSurvey(self):
 		return self.survey
 	def like(self, userName):
-		self.likes.append(userName)
+		self.iLike.add(userName)
 		if userName in self.likedBy:
 			return self.match(userName)
 		if self.newMatch:
@@ -61,21 +59,14 @@ class User:
 			return True
 		return False
 	def getLiked(self, userName):
-		self.likedBy.append(userName)
-		if userName in self.likes:
-			return self.match(userName)
-		return False
+		self.likedBy.add(userName)
+		if userName in self.iLike:
+			self.match(userName)
 	def match(self, userName):
-<<<<<<< HEAD
-		self.matches.append(userName)
-		# return userName
-		return True
-=======
-		self.matches = userName
+		self.matches.add(userName)
 		self.newMatch = True
 		return userName
 		# return True
->>>>>>> 28a5422feb360d35e088b11a6202318188ca870b
 
 auth = {'wellford': ['wellford1', 'Wellford Chan'],
 		'james': ['james2', 'James Chen'],
@@ -101,6 +92,8 @@ users = {'Wellford Chan': User(name='Wellford Chan',
 		}
 
 def myconvert(o):
+	if isinstance(o, set):
+		return list(o)
 	if callable(o):
 		return o.__str__()
 	if isinstance(o, datetime.datetime):
