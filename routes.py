@@ -182,96 +182,11 @@ def send_js(path):
 def index():
 	return send_from_directory(CLIENT_APP_FOLDER,"index.html")
 
-import scipy.io
-from scipy import stats
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.base import BaseEstimator, ClassifierMixin
 import pandas as pd
-from sklearn.preprocessing import Imputer, OneHotEncoder, LabelEncoder
-from sklearn.model_selection import KFold
 
 eps = 1e-5  # a small number
-
-
-class DecisionTree:
-
-    def __init__(self, max_depth=3, feature_labels=None):
-        self.max_depth = max_depth
-        self.features = feature_labels
-        self.left, self.right = None, None  # for non-leaf nodes
-        self.split_idx, self.thresh = None, None  # for non-leaf nodes
-        self.data, self.pred = None, None  # for leaf nodes
-
-    @staticmethod
-    def entropy(y):
-        c = dict(zip(*np.unique(y, return_counts=True)))
-        return sum([c[i]/len(y) * np.log(1/(c[i]/len(y))) for i in c])
-
-    @staticmethod
-    def information_gain(X, y, thresh):
-        dt = DecisionTree.entropy(X)
-        X_l, y_l, X_h, y_h = X[y<thresh], y[y<thresh],  X[y>=thresh], y[y>=thresh]
-        p_y_l, p_y_h = len(y_l)/len(y), len(y_h)/len(y)
-        dt_y_l, dt_y_h = DecisionTree.entropy(X_l), DecisionTree.entropy(X_h)
-        dt_xy = p_y_l * dt_y_l + p_y_h * dt_y_h
-        return dt - dt_xy
-
-    def split(self, X, y, idx, thresh):
-        X0, idx0, X1, idx1 = self.split_test(X, idx=idx, thresh=thresh)
-        y0, y1 = y[idx0], y[idx1]
-        return X0, y0, X1, y1
-
-    def split_test(self, X, idx, thresh):
-        idx0 = np.where(X[:,idx] < thresh)[0]
-        idx1 = np.where(X[:,idx] >= thresh)[0]
-        X0, X1 = X[idx0, :], X[idx1, :]
-        return X0, idx0, X1, idx1
-
-    def fit(self, X, y):
-        if self.max_depth > 0:
-            # compute entropy gain for all single-dimension splits,
-            # thresholding with a linear interpolation of 10 values
-            gains = []
-            thresh = np.array([np.linspace(np.min(X[:, i]) + eps,
-                                           np.max(X[:, i]) - eps, num=10) for i
-                               in range(X.shape[1])])
-            for i in range(X.shape[1]):
-                gains.append([self.information_gain(X[:, i], y, t) for t in
-                              thresh[i, :]])
-
-            gains = np.nan_to_num(np.array(gains))
-            self.split_idx, thresh_idx = np.unravel_index(np.argmax(gains),
-                                                          gains.shape)
-            self.thresh = thresh[self.split_idx, thresh_idx]
-            X0, y0, X1, y1 = self.split(X, y, idx=self.split_idx,
-                                        thresh=self.thresh)
-            if X0.size > 0 and X1.size > 0:
-                self.left = DecisionTree(max_depth=self.max_depth-1,
-                                         feature_labels=self.features)
-                self.left.fit(X0, y0)
-                self.right = DecisionTree(max_depth=self.max_depth-1,
-                                          feature_labels=self.features)
-                self.right.fit(X1, y1)
-            else:
-                self.max_depth = 0
-                self.data, self.labels = X, y
-                self.pred = stats.mode(y).mode[0]
-        else:
-            self.data, self.labels = X, y
-            self.pred = stats.mode(y).mode[0]
-        return self
-
-    def predict(self, X):
-        if self.max_depth == 0:
-            return self.pred * np.ones(X.shape[0])
-        else:
-            X0, idx0, X1, idx1 = self.split_test(X, idx=self.split_idx,
-                                                 thresh=self.thresh)
-            yhat = np.zeros(X.shape[0])
-            yhat[idx0] = self.left.predict(X0)
-            yhat[idx1] = self.right.predict(X1)
-            return yhat
-
 
 class BaggedTrees(BaseEstimator, ClassifierMixin):
 
@@ -292,7 +207,7 @@ class BaggedTrees(BaseEstimator, ClassifierMixin):
 
     def predict(self, X):
         preds = [tree.predict(X) for tree in self.decision_trees]
-        return stats.mode(preds)[0][0]
+        return preds[0][0]
 
 def split(tree, y):
     dts = tree.decision_trees
