@@ -68,7 +68,7 @@ export class SurveyComponent implements OnInit {
   }
 
   finish(){
-    this.router.navigate(['']);
+    this.router.navigate(['profile']);
   }
 
 }
