@@ -14,10 +14,12 @@ import { DateComponent } from './components/date/date.component';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { SurveyComponent } from './components/survey/survey.component';
 import { TrainingComponent } from './components/training/training.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'training', component: TrainingComponent},
+  { path: 'signup', component:SignUpComponent},
   { path: '',      component: DateComponent, canActivate: [AuthGuard] },
   { path: 'onboarding',      component: OnboardingComponent, canActivate: [AuthGuard] },
   { path: 'survey', component: SurveyComponent, canActivate: [AuthGuard]},
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     DateComponent,
     OnboardingComponent,
     SurveyComponent,
-    TrainingComponent
+    TrainingComponent,
+    SignUpComponent
   ],
   imports: [
     RouterModule.forRoot(

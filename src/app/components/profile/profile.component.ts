@@ -16,10 +16,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(){
+  profile(){
     if( this.Name != '' && this.Description != '' && this.Interest != '' && this.Avatar != ''){
       this.router.navigate(['finding']);
     }
-  }
+  
 
 }
