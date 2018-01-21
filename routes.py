@@ -362,7 +362,7 @@ def predict():
 	if "userName" not in r:
 		return json.dumps("bamboozle")
 	thisUser = users[r['userName']]
-	data = [smc(user.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()]
+	data = np.array([smc(thisUser.getSurvey(), user.getSurvey()).tolist()[0] + user.getSurvey() for user in users.values()])
 	predictions = model.predict(data)
 	names = users.values()
 	people = dict(zip(names, predictions))
