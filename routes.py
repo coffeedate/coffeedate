@@ -336,15 +336,16 @@ def main_method():
         "min_samples_leaf": 10,
     }
     N = 100
-    path_train, path_test = 'labels.csv', 'test.csv'
-    df, dft = pd.read_csv(path_train), pd.read_csv(path_test)
+    path_train= 'labels.csv'
+    df = pd.read_csv(path_train)
     class_names = ["Right", "Left"]
     features = df.columns.values[1:]
-    y, yt = df['label'], dft['label']
-    df, dft = df.drop('label', axis=1), dft.drop('label', axis=1)
-    X, Z = df.values, dft.values
+    y = df['label'].as_matrix().astype(np.float)
+    df = df.drop('label', axis=1)
+    X= df.values
     dt = BoostedRandomForest()
-    dt.fit(X, np.round(y))
+    dt.fit(X, y)
+    return dt
     # TODO implement and evaluate parts c-h
 def smc(X, Y):
 	X = np.mat(X)
